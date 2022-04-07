@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.business.mapper.ServiceItemMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.business.domain.ServiceItem" >
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="original_price" property="originalPrice" />
+    <result column="discount_price" property="discountPrice" />
+    <result column="car_package" property="carPackage" />
+    <result column="info" property="info" />
+    <result column="create_time" property="createTime" />
+    <result column="service_catalog" property="serviceCatalog" />
+    <result column="audit_status" property="auditStatus" />
+    <result column="sale_status" property="saleStatus" />
+    <result column="version" property="version" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" >
+    delete from bus_service_item
+    where id = #{id}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into bus_service_item (name, original_price, discount_price, car_package, info, create_time, 
+      service_catalog, audit_status, sale_status, version)
+    values (#{name}, #{originalPrice}, #{discountPrice}, #{carPackage}, #{info}, #{createTime}, 
+      #{serviceCatalog}, #{auditStatus}, #{saleStatus}, #{version})
+  </insert>
+  <update id="updateByPrimaryKey" >
+    update bus_service_item
+    set name = #{name},
+      original_price = #{originalPrice},
+      discount_price = #{discountPrice},
+      car_package = #{carPackage},
+      info = #{info},
+      create_time = #{createTime},
+      service_catalog = #{serviceCatalog},
+      audit_status = #{auditStatus},
+      sale_status = #{saleStatus},
+      version = #{version}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select id, name, original_price, discount_price, car_package, info, create_time, 
+    service_catalog, audit_status, sale_status, version
+    from bus_service_item
+    where id = #{id}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, original_price, discount_price, car_package, info, create_time, 
+    service_catalog, audit_status, sale_status, version
+    from bus_service_item
+  </select>
+    <select id="selectForList" resultMap="BaseResultMap">
+      select id, name, original_price, discount_price, car_package, info, create_time,
+    service_catalog, audit_status, sale_status, version
+    from bus_service_item
+    <where>
+      <if test=" name !=null and name != '' " >
+        AND name LIKE concat('%',#{name},'%')
+      </if>
+      <if test=" carPackage != null" >
+        AND car_package = #{carPackage}
+      </if>
+      <if test=" serviceCatalog != null  " >
+        AND service_catalog = #{serviceCatalog}
+      </if>
+      <if test=" auditStatus != null " >
+        AND audit_status = #{auditStatus}
+      </if>
+      <if test=" saleStatus != null" >
+        AND sale_status = #{saleStatus}
+      </if>
+    </where>
+    </select>
+</mapper>

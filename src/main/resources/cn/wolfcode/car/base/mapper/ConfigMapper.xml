@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.base.mapper.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.Config" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="ckey" property="ckey" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.car.base.domain.Config" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_config (name, ckey, value,
+      type, remark)
+    values (#{name,jdbcType=VARCHAR}, #{ckey,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR},
+      #{type,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.Config" >
+    update sys_config
+    set name = #{name,jdbcType=VARCHAR},
+      ckey = #{ckey,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, name, ckey, value, type, remark
+    from sys_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, ckey, value, type, remark
+    from sys_config
+  </select>
+  <select id="selectForList" resultMap="BaseResultMap" >
+    select id, name, ckey, value, type, remark
+    from sys_config
+    <where>
+      <if test="name != null and name != ''">
+        and name like concat('%', #{name}, '%')
+      </if>
+      <if test="ckey != null and ckey != ''">
+        and ckey like concat('%', #{ckey}, '%')
+      </if>
+      <if test="type != null">
+        and type = #{type}
+      </if>
+    </where>
+  </select>
+  <select id="selectByKey" resultMap="BaseResultMap" >
+    select id, name, ckey, value, type, remark
+    from sys_config where ckey = #{key}
+  </select>
+
+</mapper>

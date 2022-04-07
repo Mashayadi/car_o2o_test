@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="common/include :: header('结算单明细列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <div class="col-sm-12" style="margin-top: 10px">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">客户姓名：</label>
+                        <label class="col-sm-6 control-label">[[${statement.customerName}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">联系方式：</label>
+                        <label class="col-sm-6 control-label">[[${statement.customerPhone}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">车牌号码：</label>
+                        <label class="col-sm-6 control-label">[[${statement.licensePlate}]]</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">汽车类型：</label>
+                        <label class="col-sm-6 control-label">[[${statement.carSeries}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">服务类型：</label>
+                        <label class="col-sm-6 control-label">[[${@dict.getLabel('si_service_catalog',statement.serviceType)}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">到店时间：</label>
+                        <label class="col-sm-6 control-label" th:text="${#dates.format(statement.actualArrivalTime, 'yyyy-MM-dd HH:mm')}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">总消费金额：</label>
+                        <label class="col-sm-6 control-label" id="totalAmount">[[${statement.totalAmount}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">服务项数量：</label>
+                        <label class="col-sm-6 control-label" id="actuallyPaid">[[${statement.totalQuantity}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">优惠金额：</label>
+                        <label class="col-sm-6 control-label" id="actuallyPaid">[[${statement.discountAmount}]]</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">实付价格：</label>
+                        <label class="col-sm-6 control-label" id="actuallyPaid">[[${statement.totalAmount-statement.discountAmount}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">收款人：</label>
+                        <label class="col-sm-6 control-label" id="actuallyPaid">[[${statement.payee.userName}]]</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">收款时间：</label>
+                        <label class="col-sm-6 control-label" th:text="${#dates.format(statement.payTime, 'yyyy-MM-dd HH:mm')}"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" >
+                <div class="col-sm-4">
+                    <label class="col-sm-6 control-label">备注信息：</label>
+                    <label class="col-sm-6 control-label">[[${statement.info}]]</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="btn-group-sm" id="item-toolbar" role="group">
+            <a class="btn btn-success" >
+                <i class="fa fa-print"></i> 打印
+            </a>
+            <a  class="btn btn-warning" >
+                <i class="fa fa-folder-open"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="item-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="common/include :: footer" />
+<th:block th:include="common/include :: layout-latest" />
+<script th:inline="javascript">
+    var statementId = [[${statement.id}]];
+    // OUTER-LAYOUT
+
+    $(function() {
+        initStatementItem();
+    });
+    function initStatementItem(){
+        var options = {
+            id:"item-table",
+            toolbar:'item-toolbar',
+            url: ctx + "/business/statementItem/query?statementId="+statementId,
+            modalName: "结算单明细",
+            showSearch:false,
+            pagination:true,
+            showRefresh:true,
+            uniqueId:'uid',
+            columns: [
+                {
+                    field: 'itemName',
+                    title: '服务项名称'
+                },
+                {
+                    field: 'itemPrice',
+                    title: '服务项价格'
+                },
+                {
+                    field: 'itemQuantity',
+                    title: '购买数量'
+                }]
+        };
+        $.table.init(options);
+    }
+</script>
+</body>
+</html>

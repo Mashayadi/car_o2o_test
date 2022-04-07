@@ -1,0 +1,200 @@
+<!-- 通用CSS -->
+<head th:fragment=header(title)>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title th:text="${title}"></title>
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link th:href="@{/plugins/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+	<!-- bootstrap-table 表格插件样式 -->
+	<link th:href="@{/plugins/bootstrap-table/bootstrap-table.min.css?v=20210202}" rel="stylesheet"/>
+	<link th:href="@{/css/animate.css}" rel="stylesheet"/>
+	<link th:href="@{/css/style.css?v=20200903}" rel="stylesheet"/>
+	<link th:href="@{/ruoyi/css/ry-ui.css?v=4.6.1}" rel="stylesheet"/>
+</head>
+<!-- 通用JS -->
+<div th:fragment="footer">
+    <script th:inline="javascript">
+		var ctx = [[${#httpServletRequest.getContextPath()}]];
+	</script>
+    <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+	<script th:src="@{/plugins/bootstrap/bootstrap.min.js}"></script>
+	<!-- bootstrap-table 表格插件 -->
+	<script th:src="@{/plugins/bootstrap-table/bootstrap-table.min.js?v=20210202}"></script>
+	<script th:src="@{/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=20210202}"></script>
+	<script th:src="@{/plugins/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js?v=20210202}"></script>
+	<!-- jquery-validate 表单验证插件 -->
+	<script th:src="@{/plugins/validate/jquery.validate.min.js}"></script>
+	<script th:src="@{/plugins/validate/messages_zh.min.js}"></script>
+	<script th:src="@{/plugins/validate/jquery.validate.extend.js}"></script>
+	<!-- jquery-validate 表单树插件 -->
+	<script th:src="@{/plugins/bootstrap-treetable/bootstrap-treetable.min.js?v=20210526}"></script>
+	<!-- 遮罩层 -->
+	<script th:src="@{/plugins/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/plugins/iCheck/icheck.min.js}"></script>
+	<script th:src="@{/plugins/layer/layer.min.js?v=20210516}"></script>
+	<script th:src="@{/plugins/layui/layui.js?v=20210516}"></script>
+	<script th:src="@{/ruoyi/js/common.js?v=4.6.1}"></script>
+	<script th:src="@{/ruoyi/js/ry-ui.js?v=4.6.1}"></script>
+</div>
+
+<!-- ztree树插件 -->
+<div th:fragment="ztree">
+    <link th:href="@{/plugins/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+</div>
+
+<!-- select2下拉框插件 -->
+<div th:fragment="select2">
+    <link th:href="@{/plugins/select2/select2.min.css}" rel="stylesheet"/>
+    <link th:href="@{/plugins/select2/select2-bootstrap.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/select2/select2.min.js}"></script>
+</div>
+
+
+<!-- bootstrap-select下拉框插件 -->
+<div th:fragment="bootstrap-select">
+    <link th:href="@{/plugins/bootstrap-select/bootstrap-select.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/bootstrap-select/bootstrap-select.js}"></script>
+</div>
+
+<!-- datetimepicker日期和时间插件 -->
+<div th:fragment="datetimepicker">
+    <link th:href="@{/plugins/datapicker/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/datapicker/bootstrap-datetimepicker.min.js}"></script>
+</div>
+
+<!-- ui布局插件 -->
+<div th:fragment="layout-latest">
+    <link th:href="@{/plugins/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/jquery-layout/jquery.layout-latest.js}"></script>
+</div>
+
+
+<!-- summernote富文本编辑器插件 -->
+<div th:fragment="summernote">
+    <link th:href="@{/plugins/summernote/summernote.css}" rel="stylesheet"/>
+	<link th:href="@{/plugins/summernote/summernote-bs3.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/summernote/summernote.min.js}"></script>
+	<script th:src="@{/plugins/summernote/summernote-zh-CN.js}"></script>
+</div>
+
+<!-- cropper图像裁剪插件 -->
+<div th:fragment="cropper">
+    <link th:href="@{/plugins/cropper/cropper.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/cropper/cropper.min.js}"></script>
+</div>
+
+
+<!-- jasny功能扩展插件 -->
+<div th:fragment="jasny-bootstrap">
+    <link th:href="@{/plugins/jasny/jasny-bootstrap.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/jasny/jasny-bootstrap.min.js}"></script>
+</div>
+
+<!-- fileinput文件上传插件 -->
+<div th:fragment="bootstrap-fileinput">
+    <link th:href="@{/plugins/bootstrap-fileinput/fileinput.min.css?v=20201202}" rel="stylesheet"/>
+	<script th:src="@{/plugins/bootstrap-fileinput/fileinput.min.js?v=20201202}"></script>
+</div>
+
+
+<!-- duallistbox双列表框插件 -->
+<div th:fragment="bootstrap-duallistbox">
+    <link th:href="@{/plugins/duallistbox/bootstrap-duallistbox.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/duallistbox/bootstrap-duallistbox.min.js}"></script>
+</div>
+
+
+<!-- suggest搜索自动补全 -->
+<div th:fragment="bootstrap-suggest">
+    <script th:src="@{/plugins/suggest/bootstrap-suggest.min.js}"></script>
+</div>
+
+<!-- typeahead搜索自动补全 -->
+<div th:fragment="bootstrap-typeahead">
+    <script th:src="@{/plugins/typeahead/bootstrap3-typeahead.min.js}"></script>
+</div>
+
+<!-- 多级联动下拉 -->
+<div th:fragment="jquery-cxselect">
+    <script th:src="@{/plugins/cxselect/jquery.cxselect.min.js}"></script>
+</div>
+
+<!-- jsonview格式化和语法高亮JSON格式数据查看插件 -->
+<div th:fragment="jsonview">
+    <link th:href="@{/plugins/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/jsonview/jquery.jsonview.js}"></script>
+</div>
+
+<!-- jquery.smartwizard表单向导插件 -->
+<div th:fragment="jquery-smartwizard-css">
+    <link th:href="@{/plugins/smartwizard/smart_wizard_all.min.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/smartwizard/jquery.smartWizard.min.js}"></script>
+</div>
+
+<!-- ECharts百度统计图表插件 -->
+<div th:fragment="echarts-js">
+    <script th:src="@{/plugins/report/echarts/echarts-all.min.js}"></script>
+</div>
+
+<!-- peity图表组合插件 -->
+<div th:fragment="peity">
+    <script th:src="@{/plugins/report/peity/jquery.peity.min.js}"></script>
+</div>
+
+<!-- sparkline线状图插件 -->
+<div th:fragment="sparkline-js">
+    <script th:src="@{/plugins/report/sparkline/jquery.sparkline.min.js}"></script>
+</div>
+
+<!-- 表格行拖拽插件 -->
+<div th:fragment="bootstrap-table-reorder-row">
+	<script th:src="@{/plugins/bootstrap-table/extensions/reorder-row/bootstrap-table-reorder.js}"></script>
+	<script th:src="@{/plugins/bootstrap-table/extensions/reorder-row/jquery.tablednd.js}"></script>
+</div>
+
+<!-- 表格列拖拽插件 -->
+<div th:fragment="bootstrap-table-reorder-columns">
+	<script th:src="@{/plugins/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js}"></script>
+	<script th:src="@{/plugins/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder.min.js?v=20210203}"></script>
+</div>
+
+<!-- 表格列宽拖动插件 -->
+<div th:fragment="bootstrap-table-resizable">
+	<script th:src="@{/plugins/bootstrap-table/extensions/resizable/jquery.resizableColumns.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js?v=20210202}"></script>
+</div>
+
+<!-- 表格行内编辑插件 -->
+<div th:fragment="bootstrap-editable">
+    <link th:href="@{/plugins/bootstrap-table/extensions/editable/bootstrap-editable.css}" rel="stylesheet"/>
+	<script th:src="@{/plugins/bootstrap-table/extensions/editable/bootstrap-editable.min.js}"></script>
+	<script th:src="@{/plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js?v=20210202}"></script>
+
+</div>
+
+<!-- 表格导出插件 -->
+<div th:fragment="bootstrap-table-export">
+	<script th:src="@{/plugins/bootstrap-table/extensions/export/bootstrap-table-export.min.js?v=20210523}"></script>
+	<script th:src="@{/plugins/bootstrap-table/extensions/export/tableExport.min.js?v=20210523}"></script>
+</div>
+
+<!-- 表格冻结列插件 -->
+<div th:fragment="bootstrap-table-fixed-columns">
+	<script th:src="@{/plugins/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.min.js?v=20210202}"></script>
+</div>
+
+<!-- 表格自动刷新插件 -->
+<div th:fragment="bootstrap-table-auto-refresh">
+	<script th:src="@{/plugins/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.min.js?v=20210202}"></script>
+</div>
+
+<!-- 表格打印插件 -->
+<div th:fragment="bootstrap-table-print">
+	<script th:src="@{/plugins/bootstrap-table/extensions/print/bootstrap-table-print.min.js?v=20200729}"></script>
+</div>

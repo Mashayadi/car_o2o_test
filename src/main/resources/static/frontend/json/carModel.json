@@ -1,0 +1,162 @@
+{
+  "code": 200,
+  "data": {
+    "car": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级运动轿车1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级运动轿车2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级运动轿车3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ],
+    "suv": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级SUV1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级SUV2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级SUV2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级SUV3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ],
+    "coupe": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "敞篷跑车1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "敞篷跑车2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "敞篷跑车3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ],
+    "mpv": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级MPV1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级MPV2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级MPV2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级MPV2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "长轴距E级MPV3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ],
+    "electricVehicle": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "纯电动车1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "纯电动车2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "纯电动车3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ],
+    "hybrid": [
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力1",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力2",
+        "price": "88.88",
+        "monthPrice": "888"
+      },
+      {
+        "img": "/frontend/img/car-model.png",
+        "name": "插电式混合动力3",
+        "price": "88.88",
+        "monthPrice": "888"
+      }
+    ]
+  },
+  "msg": "请求成功"
+}

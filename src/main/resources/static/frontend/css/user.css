@@ -1,0 +1,176 @@
+.change-user {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #999999;
+}
+.change-user img {
+    margin-left: 8px;
+}
+.main-container {
+    margin: 0 auto;
+    background: #F0F0F0;
+}
+
+.main-container .main-content {
+    min-height: 200px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.main-content .prompt {
+    padding: 23px 0px 17px 0px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.main-content .info-container {
+    margin-bottom: 60px;
+}
+
+.info-container .info-menu-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    line-height: 60px;
+    background: #F8F8F8;
+}
+
+.info-menu-list .info-menu-item {
+    position: relative;
+    padding: 0px 48px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333333;
+}
+
+.info-menu-list .info-menu-item.info-menu-item-active {
+    color: #388CFF;
+}
+
+.info-menu-list .info-menu-item i {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0px;
+    height: 2px;
+    background-color: #388CFF;
+    transition: all 0.2s;
+}
+
+.info-menu-list .info-menu-item.info-menu-item-active i {
+    width: 72px;
+}
+
+.info-container .info-content {
+    height: 263px;
+    background: #FFFFFF;
+}
+.info-content .info-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+.info-content .info-item.info-item-active {
+    display: block;
+}
+.info-content .violation-info {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 64px;
+}
+.violation-info .user-info {
+    margin-left: 34px;
+}
+.user-info .title {
+    padding-bottom: 17px;
+    font-size: 24px;
+    color: #333333;
+}
+.user-info .subtitle {
+    font-size: 16px;
+    color: #999999;
+}
+.violation-info .adviser-info {
+    margin: 0px 200px 0px 134px;
+}
+.adviser-info .adviser-info-item {
+    font-size: 16px;
+    color: #333333;
+}
+.adviser-info .adviser-info-item:first-child {
+    padding-bottom: 17px;
+}
+.adviser-info-item span {
+    font-size: 16px;
+    font-weight: 300;
+    color: #999999;
+}
+.adviser-info-item img {
+    margin-right: 10px;
+}
+.violation-info .adviser-operation {
+
+}
+.adviser-operation .adviser-operation-item {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300;
+    color: #999999;
+}
+.adviser-operation .adviser-operation-item:first-child {
+   padding-bottom: 17px;
+}
+.adviser-operation-item img {
+    margin-left: 10px;
+}
+.main-content .function-container {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.function-container .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.function-container .title i {
+    display: inline-block;
+    width: 4px;
+    height: 36px;
+    margin-right: 10px;
+    background-color: #388CFF;
+}
+
+.function-container .function-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.function-list .function-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 340px;
+    height: 150px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    background: #FFFFFF;
+}
+.function-item .function-text {
+    width: 125px;
+    font-size: 30px;
+    color: #333333;
+}
+.function-item .function-icon {
+
+}

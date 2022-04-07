@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>e店邦</title>
+    <link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/frontend/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="/frontend/css/reset.css">
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/ownerBook.css">
+</head>
+<body>
+<!--头部菜单-->
+<div class="header"></div>
+
+<!--主体内容-->
+<div class="main-container">
+    <!--左边菜单-->
+    <ul class="left-menu">
+        <li index="0" class="left-menu-item"><i></i>故障灯解读</li>
+        <li index="1" class="left-menu-item"><i></i>我的周边</li>
+        <li index="2" class="left-menu-item"><i></i>购车计算器</li>
+        <li index="3" class="left-menu-item"><i></i>保险计算器</li>
+        <li index="4" class="left-menu-item"><i></i>故障救援电话</li>
+    </ul>
+    <!--内容-->
+    <div class="right-content">
+        <!--故障灯解读-->
+        <div class="content-item">
+            <div class="fault-light">
+                <img src="/frontend/img/fault-light-bg.png"/>
+                <ul class="light-list">
+                    <li class="light-item light-item-active">
+                        <img src="/frontend/img/fault-light-icon1.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon2.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon3.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon4.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon5.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon6.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon7.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon8.png"/>
+                        <i></i>
+                    </li>
+                    <li class="light-item">
+                        <img src="/frontend/img/fault-light-icon9.png"/>
+                        <i></i>
+                    </li>
+                </ul>
+                <div class="light-content">
+                    <p class="light-name">低机油压力指示灯</p>
+                    <p class="light-info">- 当发动机机油压力低时点亮。</p>
+                </div>
+            </div>
+        </div>
+        <!--我的周边-->
+        <div class="content-item">
+            <div class="surround-content">
+                <div class="surround-menu">
+                    <div class="surround-menu-item surround-menu-item-active">周边停车场</div>
+                    <div class="surround-menu-item">周边加油站</div>
+                </div>
+                <div id="map-container" class="map-container">
+                    <div id="panel"></div>
+                </div>
+            </div>
+        </div>
+        <!--购车计算器-->
+        <div class="content-item">
+            <div class="calculation-content">
+                <div class="calculation-from">
+                    <form id="buyCarForm">
+                        <div class="form-group from-select">
+                            <select id="carSeries-buyCar" class="selectpicker" data-width="100%" title="选择车系" name="carSeries">
+                                <option>车系一</option>
+                                <option>车系二</option>
+                                <option>车系三</option>
+                            </select>
+                        </div>
+                        <div class="form-group from-select">
+                            <select id="modal-buyCar" class="selectpicker" data-width="100%" title="选择车型" name="modal">
+                                <option>车型一</option>
+                                <option>车型二</option>
+                                <option>车型三</option>
+                            </select>
+                        </div>
+                        <div class="form-group from-select">
+                            <select id="configure-buyCar" class="selectpicker" data-width="100%" title="选择配置" name="configure">
+                                <option>配置一</option>
+                                <option>配置二</option>
+                                <option>配置三</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" id="calculation-buyCar">开始计算</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="programme-item">
+                    <img class="programme-img" src="/frontend/img/programme-img1.png"/>
+                    <div class="programme-info">
+                        <p class="text">裸价</p>
+                        <p class="value">139,950</p>
+                    </div>
+                    <div class="programme-info">
+                        <p class="text">商业保险</p>
+                        <p class="value">139,950</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--保险计算器-->
+        <div class="content-item">
+            <div class="calculation-content">
+                <div class="calculation-from">
+                    <form id="insuranceForm">
+                        <div class="form-group from-select">
+                            <select id="carSeries-insurance" class="selectpicker" data-width="100%" title="选择车系" name="carSeries">
+                                <option>车系一</option>
+                                <option>车系二</option>
+                                <option>车系三</option>
+                            </select>
+                        </div>
+                        <div class="form-group from-select">
+                            <select id="modal-insurance" class="selectpicker" data-width="100%" title="选择车型" name="modal">
+                                <option>车型一</option>
+                                <option>车型二</option>
+                                <option>车型三</option>
+                            </select>
+                        </div>
+                        <div class="form-group from-select">
+                            <select id="configure-insurance" class="selectpicker" data-width="100%" title="选择配置" name="configure">
+                                <option>配置一</option>
+                                <option>配置二</option>
+                                <option>配置三</option>
+                            </select>
+                        </div>
+                        <div class="form-group from-select">
+                            <select id="stages-insurance" class="selectpicker" data-width="100%" title="选择分期" name="stages">
+                                <option>分期一</option>
+                                <option>分期二</option>
+                                <option>分期三</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" id="calculation-stages">开始计算</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="programme-item">
+                    <img class="programme-img" src="img/programme-img1.png"/>
+                    <div class="programme-info">
+                        <p class="text">首付金额</p>
+                        <p class="value">139,950</p>
+                    </div>
+                    <div class="programme-info">
+                        <p class="text">贷款金额</p>
+                        <p class="value">139,950</p>
+                    </div>
+                    <div class="programme-info">
+                        <p class="text">年化利率</p>
+                        <p class="value">0.00%</p>
+                    </div>
+                    <div class="programme-info">
+                        <p class="text">月供金额</p>
+                        <p class="value">7,775</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--故障救援电话-->
+        <div class="content-item">
+            <div class="fault-rescue">
+                <div class="left-page">
+                    <div class="rescue-item">
+                        <p class="rescue-item-text">24小时救援电话</p>
+                        <p class="rescue-item-value">020-8888888</p>
+                    </div>
+                    <div class="rescue-item">
+                        <p class="rescue-item-text">交警</p>
+                        <p class="rescue-item-value">020-8888888</p>
+                    </div>
+                    <div class="rescue-select">
+                        <select class="selectpicker" data-width="255">
+                            <option>中国人保</option>
+                            <option>中国平安</option>
+                        </select>
+                    </div>
+                    <div class="rescue-item">
+                        <p class="rescue-item-text">保险电话</p>
+                        <p class="rescue-item-value">020-8888888</p>
+                    </div>
+                </div>
+                <div class="right-page">
+                    <div class="rescue-item">
+                        <p class="rescue-item-text">售后热线</p>
+                        <p class="rescue-item-value">020-8888888</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部内容-->
+<div class="footer"></div>
+
+<script src="/frontend/js/jquery-3.6.0.min.js"></script>
+<script src="/frontend/js/bootstrap.min.js"></script>
+<script src="/frontend/js/bootstrap-select.min.js"></script>
+<script src="/frontend/js/bootstrapValidator.min.js"></script>
+<script src="/frontend/js/layer/layer.js"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=a56c5db4b8fbe7f40e8ffa57c43b8345"></script>
+<script src="/frontend/js/ownerBook.js"></script>
+</body>
+</html>

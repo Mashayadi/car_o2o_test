@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.base.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phonenumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <association property="dept"     column="dept_id" javaType="cn.wolfcode.car.base.domain.Dept" resultMap="deptResult" />
+  </resultMap>
+  <resultMap id="deptResult" type="cn.wolfcode.car.base.domain.Dept">
+    <id     property="id"   column="id"     />
+    <result property="name" column="name"   />
+    <result property="leader"   column="leader"      />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.car.base.domain.User" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_user (dept_id, login_name, user_name, 
+       email, phonenumber,
+      sex, avatar, password, 
+      salt, status, login_ip,
+      login_date, remark)
+    values (#{deptId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+     #{email,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR},
+      #{sex,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{loginIp,jdbcType=VARCHAR},
+      #{loginDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.User" >
+    update sys_user
+    set dept_id = #{deptId,jdbcType=BIGINT},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar, 
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar, 
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user
+  </select>
+
+  <select id="selectByDeptId" resultMap="BaseResultMap" >
+    select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar,
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user where dept_id = #{deptId}
+  </select>
+
+  <select id="selectByLoginName" resultMap="BaseResultMap">
+     select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar,
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user where login_name = #{username}
+  </select>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+     select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar,
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user where phonenumber = #{phonenumber}
+  </select>
+
+
+  <select id="selectByEmail" resultMap="BaseResultMap">
+     select id, dept_id, login_name, user_name, user_type, email, phonenumber, sex, avatar,
+    password, salt, status, del_flag, login_ip, login_date, remark
+    from sys_user where email = #{email}
+  </select>
+
+  <update id="updateInfo" parameterType="cn.wolfcode.car.base.domain.User" >
+    update sys_user
+    set
+      user_name = #{userName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateUserPassword" parameterType="cn.wolfcode.car.base.domain.User" >
+     update sys_user
+    set
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectForList" resultMap="BaseResultMap">
+    select u.id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex,
+    u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.remark, d.name, d.leader
+     from sys_user u
+    left join sys_dept d on u.dept_id = d.id
+
+    <where>
+      and  u.del_flag = '0'
+      <if test="loginName != null and loginName != ''">
+        AND u.login_name like concat('%', #{loginName}, '%')
+      </if>
+      <if test="phonenumber != null and phonenumber != ''">
+        AND u.phonenumber like concat('%', #{phonenumber}, '%')
+      </if>
+      <if test="status != null and status != ''">
+        AND u.status = #{status}
+      </if>
+      <if test="deptId != null">
+        AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.id FROM sys_dept t WHERE FIND_IN_SET (#{deptId},ancestors) ))
+      </if>
+    </where>
+  </select>
+
+  <select id="selectForAllocated" resultMap="BaseResultMap">
+    select u.id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.phonenumber, u.sex, u.avatar,
+    u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.remark
+    from sys_user u
+    <where>
+      <if test="roleId != null">
+        and u.id in (select user_id from sys_user_role where role_id=#{roleId})
+      </if>
+      <if test="loginName != null and loginName != ''">
+        AND u.login_name like concat('%', #{loginName}, '%')
+      </if>
+      <if test="phonenumber != null and phonenumber != ''">
+        AND u.phonenumber like concat('%', #{phonenumber}, '%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectForUnAllocated" resultMap="BaseResultMap">
+    select u.id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.phonenumber, u.sex, u.avatar,
+    u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.remark
+    from sys_user u
+    <where>
+      and u.id not in (select user_id from sys_user_role where role_id=#{roleId})
+      <if test="loginName != null and loginName != ''">
+        AND u.login_name like concat('%', #{loginName}, '%')
+      </if>
+      <if test="phonenumber != null and phonenumber != ''">
+        AND u.phonenumber like concat('%', #{phonenumber}, '%')
+      </if>
+    </where>
+  </select>
+
+  <update id="updateAvatar">
+    update sys_user set avatar = #{avatar} where id = #{userId}
+  </update>
+
+  <update id="updateStatus">
+    update sys_user set status=#{status} where id = #{userId}
+  </update>
+
+  <insert id="insertRelation">
+        insert into sys_user_post(user_id, post_id) values(#{userId}, #{postId})
+  </insert>
+
+  <delete id="deleteRelation">
+    delete from sys_user_post where user_id = #{userId}
+  </delete>
+
+  <delete id="deleteRoleRelation">
+    delete from sys_user_role where user_id = #{userId}
+  </delete>
+
+  <select id="selectByRoleKey" resultMap="BaseResultMap">
+    select u.id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.phonenumber, u.sex, u.avatar,
+    u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.remark
+    from sys_user u where id in (select user_id from sys_user_role where role_id in (select id from sys_role where rkey = #{rkey}))
+  </select>
+</mapper>

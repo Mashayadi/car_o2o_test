@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="common/include :: header('修改流程定义')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-bpmnInfo-edit" th:object="${serviceItem}">
+        <input name="id" th:field="*{id}" type="hidden">
+        <input name="bpmnInfoId" th:value="${bpmnInfo!=null?bpmnInfo.id:''}" type="hidden" >
+        <div class="form-group">
+            <label class="col-sm-3 control-label">流程名称：</label>
+            <div class="col-sm-8">
+                <input name="name" th:field="*{name}" class="form-control" type="text" readonly disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">原价：</label>
+            <div class="col-sm-8">
+                <input name="originalPrice"  th:field="*{originalPrice}" class="form-control" type="text" readonly disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">折扣价：</label>
+            <div class="col-sm-8">
+                <input name="discountPrice" id="discountPriceId" th:field="*{discountPrice}" class="form-control" type="text" readonly disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">审核流程：</label>
+            <div class="col-sm-8">
+                <input name="bpmnInfoId" th:value="${bpmnInfo!=null?bpmnInfo.bpmnName:''}" class="form-control" type="text" readonly disabled="disabled">
+            </div>
+        </div>
+
+        <div class="form-group" id="directorId">
+            <label class="col-sm-3 control-label">审核人(店长)：</label>
+            <div class="col-sm-8">
+                <select name="director" class="form-control m-b" >
+                    <option th:each="u : ${directors}" th:text="${u.userName}" th:value="${u.id}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" id="financeId">
+            <label class="col-sm-3 control-label">审核人(财务)：</label>
+            <div class="col-sm-8">
+                <select name="finance" class="form-control m-b" >
+                    <option th:each="u : ${finances}" th:text="${u.userName}" th:value="${u.id}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注信息：</label>
+            <div class="col-sm-8">
+                <textarea name="info" class="form-control"></textarea>
+            </div>
+        </div>
+
+    </form>
+</div>
+<th:block th:include="common/include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "/business/serviceItem";
+    var bus_carPackageLimit = [[${@config.getValue('bus_car_package_limit')}]];
+    $(function () {
+        if($("#discountPriceId").val() < bus_carPackageLimit){
+            $("#financeId").remove();
+        }
+    })
+    $("#form-bpmnInfo-edit").validate({
+        focusCleanup: true
+    });
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/startAudit", $('#form-bpmnInfo-edit').serialize());
+        }
+    }
+</script>
+</body>
+</html>

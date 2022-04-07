@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.base.mapper.LoginInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.LoginInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="ipaddr" property="ipaddr" jdbcType="VARCHAR" />
+    <result column="login_location" property="loginLocation" jdbcType="VARCHAR" />
+    <result column="browser" property="browser" jdbcType="VARCHAR" />
+    <result column="os" property="os" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_logininfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.car.base.domain.LoginInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_logininfo (login_name, ipaddr, login_location, 
+      browser, os, status, msg, 
+      login_time)
+    values (#{loginName,jdbcType=VARCHAR}, #{ipaddr,jdbcType=VARCHAR}, #{loginLocation,jdbcType=VARCHAR}, 
+      #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{msg,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.LoginInfo" >
+    update sys_logininfo
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      ipaddr = #{ipaddr,jdbcType=VARCHAR},
+      login_location = #{loginLocation,jdbcType=VARCHAR},
+      browser = #{browser,jdbcType=VARCHAR},
+      os = #{os,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, login_name, ipaddr, login_location, browser, os, status, msg, login_time
+    from sys_logininfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, login_name, ipaddr, login_location, browser, os, status, msg, login_time
+    from sys_logininfo
+  </select>
+  <select id="selectForList" resultMap="BaseResultMap" >
+    select id, login_name, ipaddr, login_location, browser, os, status, msg, login_time
+    from sys_logininfo
+
+    <where>
+      <if test="ipaddr != null and ipaddr !=''">
+        and ipaddr like concat('%',#{ipaddr},'%')
+      </if>
+      <if test="loginName != null and loginName !=''">
+        and login_name like concat('%',#{loginName},'%')
+      </if>
+      <if test="status != null and status !=''">
+        and status = #{status}
+      </if>
+      <if test="beginTime != null "><!-- 开始时间检索 -->
+        and date_format(login_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+      </if>
+      <if test="endTime != null"><!-- 结束时间检索 -->
+        and date_format(login_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+      </if>
+    </where>
+  </select>
+
+  <update id="cleanLogininfo">
+        truncate table sys_logininfo
+    </update>
+</mapper>

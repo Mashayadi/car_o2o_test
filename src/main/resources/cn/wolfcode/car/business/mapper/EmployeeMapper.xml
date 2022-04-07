@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.business.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.business.domain.Employee" >
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="email" property="email" />
+    <result column="sex" property="sex" />
+    <result column="age" property="age" />
+    <result column="admin" property="admin" />
+    <result column="status" property="status" />
+    <result column="dept_id" property="dept.id" />
+    <result column="dept_name" property="dept.name" />
+    <result column="dept_sn" property="dept.sn" />
+    <result column="hiredate" property="hiredate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" >
+    delete from employee
+    where id = #{id}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into employee (name, email, sex, age, admin, status, dept_id, hiredate
+      )
+    values (#{name}, #{email}, #{sex}, #{age}, #{admin}, #{status}, #{dept.id}, #{hiredate}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" >
+    update employee
+    set name = #{name},
+      email = #{email},
+      age = #{age},
+      admin = #{admin},
+      status = #{status},
+      dept_id = #{dept.id}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select id, name, email, sex, age, admin, status, dept_id, hiredate
+    from employee
+    where id = #{id}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, email, sex, age, admin, status, dept_id, hiredate
+    from employee
+  </select>
+  <select id="selectForList" resultMap="BaseResultMap" >
+    select e.id id, e.name name , e.email email, e.sex sex,e.age age,
+     e.admin admin,e.status status, e.dept_id dept_id, e.hiredate hiredate
+     ,d.name dept_name,d.sn dept_sn
+    from employee e LEFT JOIN department d ON e.dept_id = d.id
+    <where>
+       <if test=" keyword != null and keyword != '' ">
+         and (e.name like concat('%',#{keyword},'%') OR e.email like concat('%',#{keyword},'%') )
+       </if>
+       <if test=" isAdmin != null " >
+         and e.admin = #{isAdmin}
+       </if>
+      <if test=" deptId != null " >
+         and e.dept_id = #{deptId}
+      </if>
+      <if test=" startTime != null  and  startTime != '' " >
+         and e.hiredate &gt;= startTime
+      </if>
+      <if test=" endTime != null  and  endTime != '' " >
+         and e.hiredate &lt;= endTime
+      </if>
+      <if test=" status != null " >
+         and e.status = #{status}
+      </if>
+
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,110 @@
+.main-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../img/maintenance-bg.png') no-repeat center;
+    background-size: 100% 100%;
+}
+.main-container::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,0.6);
+}
+.main-container .main-content {
+    display: inline-block;
+    width: 880px;
+    padding: 20px 0px;
+    z-index: 1000;
+}
+.main-content .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 77px;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+.main-content .title i {
+    display: inline-block;
+    width: 4px;
+    height: 36px;
+    margin-right: 10px;
+    background-color: #388CFF;
+}
+.form-list {
+    display: flex;
+    margin-bottom: 40px;
+}
+.form-list .form-list-item {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.form-list .form-list-item.form-list-item1 {
+    flex: 2;
+    padding-right: 50px;
+}
+.form-list .form-list-item .form-title {
+    width: 120px;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.form-list .form-list-item .form-control {
+    flex: 1;
+    font-size: 18px;
+}
+.form-list .form-list-item .form-control.form-control-phone {
+    padding: 6px 125px 6px 12px;
+}
+.form-list .form-list-item input.form-control {
+    height: 58px;
+}
+.form-list-item .send-btn {
+    position: absolute;
+    right: 70px;
+    min-width: 90px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #388CFF;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #388CFF;
+}
+.bv-form .form-list-item  .help-block {
+    position: absolute;
+    bottom: -20px;
+    left: 120px;
+    font-size: 16px;
+}
+.form-list .form-list-item .radio-inline {
+    font-size: 18px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.form-list .form-list-item .radio {
+    font-size: 18px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.form-list .form-list-item .radio label {
+    font-size: 18px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.bv-form .form-list-item .radio .help-block {
+    left: 20px;
+}
+.dropdown-menu>li>a {
+    padding: 8px 20px;
+    font-size: 18px;
+}

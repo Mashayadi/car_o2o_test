@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="common/include :: header('养修服务单项列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="serviceItem-form" method="post">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            名称：<input type="text" name="name"/>
+                        </li>
+                        <li>
+                            是否套餐：<select name="carPackage" th:with="type=${@dict.getType('si_car_package')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            服务分类：<select name="serviceCatalog" th:with="type=${@dict.getType('si_service_catalog')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            审核状态：<select name="auditStatus" th:with="type=${@dict.getType('si_audit_status')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            上架状态：<select name="saleStatus" th:with="type=${@dict.getType('si_sale_status')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.label}" th:value="${dict.value}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="business:serviceItem:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-warning auditBtn" onclick="startAudit()"
+               shiro:hasPermission="business:serviceItem:edit">
+                <i class="fa fa-download"></i> 发起审核
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="common/include :: footer"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('business:serviceItem:edit')}]];
+
+    var saleOnFlag = [[${@permission.hasPermi('business:serviceItem:saleOn')}]];
+    var saleOffFlag = [[${@permission.hasPermi('business:serviceItem:saleOff')}]];
+    var removeFlag = [[${@permission.hasPermi('business:serviceItem:remove')}]];
+    var carPackageData = [[${@dict.getType('si_car_package')}]];
+    var serviceCatalogData = [[${@dict.getType('si_service_catalog')}]];
+    var auditStatusData = [[${@dict.getType('si_audit_status')}]];
+    var saleStatusData = [[${@dict.getType('si_sale_status')}]];
+    var prefix = ctx + "/business/serviceItem";
+
+    $(function () {
+        var options = {
+            url: prefix + "/query",
+            createUrl: prefix + "/addPage",
+            updateUrl: prefix + "/editPage?id={id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            sortName: "seq",
+            modalName: "服务单项",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'name',
+                    title: '服务项名称',
+                    sortable: true
+                }, {
+                    field: 'originalPrice',
+                    title: '服务项原价',
+                    sortable: true
+                }, {
+                    field: 'discountPrice',
+                    title: '服务项折扣价',
+                    sortable: true
+                },
+                {
+                    field: 'carPackage',
+                    title: '是否套餐',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(carPackageData, value);
+                    }
+                },
+                {
+                    field: 'info',
+                    title: '备注信息',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.tooltip(value, 40);
+                    }
+                },
+                {
+                    field: 'serviceCatalog',
+                    title: '服务分类',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(serviceCatalogData, value);
+                    }
+                },
+                {
+                    field: 'auditStatus',
+                    title: '审核状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(auditStatusData, value);
+                    }
+                },
+                {
+                    field: 'saleStatus',
+                    title: '上架状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(saleStatusData, value);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+
+                        var editBtnFlag = editFlag;
+                        var removeBtnFlag = removeFlag;
+                        var saleOffBtnFlag = saleOffFlag;
+                        var saleOnBtnFlag = saleOnFlag;
+
+                        if (row.saleStatus == 1) {
+                            //如果上架状态不能修改
+                            editBtnFlag += " disabled";
+                            removeBtnFlag += " disabled";
+                        } else if (row.auditStatus == 1) {
+                            //如果处于审核中的话，是不能修改
+                            editBtnFlag += " disabled";
+                            removeBtnFlag += " disabled";
+                        }
+                        actions.push('<a class="btn btn-success btn-xs ' + editBtnFlag + '" href="javascript:void(0)" ' +
+                            'onclick="$.operate.edit(\'' + row.id + '\')">' +
+                            '<i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeBtnFlag + '" href="javascript:void(0)"' +
+                            ' onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        if (row.saleStatus) {
+                            actions.push('<a class="btn btn-danger btn-xs ' + saleOffBtnFlag + '" href="javascript:void(0)" onclick="saleOff(\'' + row.id + '\')"><i class="fa fa-remove"></i>下架</a>');
+                        } else {
+                            if (row.carPackage == 1 && row.auditStatus != 2) {
+                                saleOnBtnFlag += " disabled";
+                            }
+                            actions.push('<a class="btn btn-info btn-xs ' + saleOnBtnFlag + '" href="javascript:void(0)" onclick="saleOn(\'' + row.id + '\')"><i class="fa fa-check"></i>上架</a>');
+                        }
+                        return actions.join('');
+
+                    }
+                }]
+        };
+        $.table.init(options);
+
+        $("#bootstrap-table").on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table",
+            function () {
+                //下架才能进行修改
+                var rows = $.table.selectColumns("carPackage");
+                if (rows.length == 1 && rows[0] == 1) {
+                    //是套餐且状态为初始化或者拒绝
+                    var auditStatus = $.table.selectColumns("auditStatus")[0];
+                    console.log(auditStatus == 0);
+                    if (auditStatus == 0 || auditStatus == 3) {
+                        $(".auditBtn").removeClass("disabled");
+                        return;
+                    }
+                }
+                $(".auditBtn").addClass("disabled");
+            });
+    });
+
+    function saleOff(id) {
+        $.modal.confirm("确认需要下架此服务项吗?", function () {
+            $.operate.submit(prefix + "/saleOff?id=" + id, "post");
+        });
+    }
+
+    function saleOn(id) {
+        $.modal.confirm("确认需要上架此服务项吗?", function () {
+            $.operate.submit(prefix + "/saleOn?id=" + id, "post");
+        });
+    }
+
+    function startAudit() {
+        var rows = $.table.selectColumns("id");
+        if (rows.length == 1) {
+            $.modal.open("发起审核", prefix + "/auditPage?id=" + rows[0]);
+        }else {
+            $.modal.alertWarning("只能选择一条记录");
+        }
+    }
+
+
+</script>
+</body>
+</html>

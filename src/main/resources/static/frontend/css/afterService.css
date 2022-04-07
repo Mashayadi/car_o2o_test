@@ -1,0 +1,165 @@
+.background-img {
+    width: 100%;
+    height: 500px;
+}
+.background-img img {
+    width: 100%;
+    height: 100%;
+}
+.main-content {
+    text-align: center;
+}
+.main-content .nav-list {
+    padding: 30px 0px 56px 0px;
+}
+.nav-list .nav-list-item {
+    position: relative;
+    display: inline-block;
+    padding: 0px 35px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+.nav-list .nav-list-item::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 100%;
+    background-color: #D4D4D4;
+}
+.nav-list .nav-list-item:last-child::after {
+    content: '';
+    display: none;
+}
+.main-content .content-item {
+    display: inline-block;
+    width: 1200px;
+    text-align: left;
+}
+.content-item .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    font-size: 30px;
+    color: #333333;
+}
+.content-item .title i {
+    display: inline-block;
+    width: 4px;
+    height: 36px;
+    margin-right: 10px;
+    background-color: #388CFF;
+}
+.content-item .subtitle {
+    padding: 17px 0px;
+    text-align: center;
+    border: 1px solid #707070;
+    font-size: 24px;
+    color: #333333;
+}
+.content-item .content {
+    padding-top: 60px;
+}
+
+/*服务承诺*/
+.content .info-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.info-list .info-item {
+    flex: 0 0 50%;
+    margin-bottom: 70px;
+    padding: 0px 50px;
+    font-size: 18px;
+    color: #333333;
+}
+.info-item .info-title {
+    margin-bottom: 20px;
+}
+
+/*惊喜礼献*/
+.content .gift-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+.gift-list .gift-item {
+    position: relative;
+    width: 340px;
+    height: 150px;
+    background: url("../img/gift-bg1.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.gift-list .gift-item:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: url("../img/gift-bg2.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.gift-item .gift-info {
+    position: absolute;
+    top: 42px;
+    left: 26px;
+    text-align: center;
+}
+.gift-info .value {
+    font-size: 55px;
+    color: #333333;
+}
+.gift-info .text {
+    font-size: 18px;
+    color: #333333;
+}
+.gift-item .gift-num {
+    position: absolute;
+    right: 17px;
+    top: -19px;
+    width: 74px;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+    background: #388CFF;
+    border-radius: 50%;
+    font-size: 36px;
+    color: #FFFFFF;
+}
+/*养护攻略*/
+.strategy-content {
+    display: flex;
+    margin-bottom: 40px;
+}
+.strategy-content .strategy-item {
+    flex: 1;
+}
+.strategy-title{
+    padding-bottom: 20px;
+    font-size: 18px;
+    color: #333333;
+}
+.strategy-item .strategy-text {
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333333;
+}
+.strategy-content2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+}
+.strategy-content2 .strategy-text2 {
+    flex: 0 0 50%;
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333333;
+}

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>e店邦</title>
+    <link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/css/reset.css">
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/user.css">
+
+</head>
+<body>
+<!--头部菜单-->
+<div class="header-container">
+    <a href="home.html"><img class="logo-img" src="img/logo.png"/></a>
+    <!--导航菜单-->
+    <ul class="menu-list" style="width: 800px">
+    </ul>
+    <a href="user.html" class="user-content">
+        <i></i>
+        <p id="userName" class="user-name"></p>
+    </a>
+    <div onclick="changeUser()" class="change-user">
+        切换身份
+        <img src="/frontend/img/change-icon.png"/>
+    </div>
+</div>
+
+<!--主体内容-->
+<div class="main-container">
+    <div class="main-content">
+        <p class="prompt">尊敬的车主，晚上好！</p>
+        <div class="info-container">
+            <ul class="info-menu-list">
+                <li index="0" class="info-menu-item info-menu-item-active"><i></i>违章查询</li>
+                <li index="1" class="info-menu-item"><i></i>保险</li>
+                <li index="2" class="info-menu-item"><i></i>维修保养</li>
+            </ul>
+            <div class="info-content">
+                <div class="info-item info-item-active">
+                    <div class="violation-info">
+                        <img src="img/user-icon2.png" width="116" height="116"/>
+                        <div class="user-info">
+                            <p class="title">张怡清</p>
+                            <p class="subtitle">服务顾问</p>
+                        </div>
+                        <div class="adviser-info">
+                            <p class="adviser-info-item"><img src="/frontend/img/tel-icon.png"/><span>顾问：</span>1388888888</p>
+                            <p class="adviser-info-item"><img src="/frontend/img/tel-icon.png"/><span>经销商：</span>020-28088666</p>
+                        </div>
+                        <div class="adviser-operation">
+                            <p class="adviser-operation-item">点评顾问<img src="/frontend/img/comment-icon.png"/></p>
+                            <p class="adviser-operation-item">更换顾问<img src="/frontend/img/change-icon.png"/></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item"></div>
+                <div class="info-item"></div>
+            </div>
+        </div>
+        <div class="function-container">
+            <p class="title"><i></i>我的预约</p>
+            <div class="function-list">
+                <div class="function-item myAppoint">
+                    <p class="function-text">养护预约</p>
+                    <img class="function-icon" src="/frontend/img/function-user1.png"/>
+                </div>
+                <div class="function-item">
+                    <p class="function-text">续保预约</p>
+                    <img class="function-icon" src="/frontend/img/function-user2.png"/>
+                </div>
+                <div class="function-item">
+                    <p class="function-text">维修保养记录</p>
+                    <img class="function-icon" src="/frontend/img/function-user3.png"/>
+                </div>
+            </div>
+        </div>
+        <div class="function-container">
+            <p class="title"><i></i>其它</p>
+            <div class="function-list">
+                <div class="function-item">
+                    <p class="function-text">我的消息</p>
+                    <img class="function-icon" src="/frontend/img/function-user4.png"/>
+                </div>
+                <div class="function-item">
+                    <p class="function-text">我的钱包</p>
+                    <img class="function-icon" src="/frontend/img/function-user5.png"/>
+                </div>
+                <div class="function-item">
+                    <p class="function-text">我的服务点评</p>
+                    <img class="function-icon" src="/frontend/img/function-user6.png"/>
+                </div>
+                <div class="function-item">
+                    <p class="function-text">我的救援记录</p>
+                    <img class="function-icon" src="/frontend/img/function-user7.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="recordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">导入</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="table"></table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--底部内容-->
+<div class="footer"></div>
+
+<script src="/frontend/js/jquery-3.6.0.min.js"></script>
+<script src="/frontend/js/bootstrap.min.js"></script>
+<script src="/frontend/js/layer/layer.js"></script>
+<script src="/frontend/js/user.js"></script>
+<!-- bootstrap-table 表格插件 -->
+<link href="/frontend/js/bootstrap-table/bootstrap-table.min.css?v=20210202" rel="stylesheet"/>
+<script src="/frontend/js/bootstrap-table/bootstrap-table.min.js?v=20210202"></script>
+<script src="/frontend/js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=20210202"></script>
+<script src="/frontend/js/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js?v=20210202"></script>
+<script>
+    $(function(){
+        $.ajax({
+            url:"/frontend/getCurrentUser",
+            success:function(result){
+                if(result.success){
+                    $("#userName").html(result.data.userName);
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+        $('#table').bootstrapTable({
+            url: '/frontend/listData',
+            method: 'GET',   //数据请求方式
+            columns: [{
+                field: 'id',
+                title: '编号'
+            }, {
+                field: 'licensePlate',
+                title: '车牌号码'
+            }, {
+                field: 'appointmentTime',
+                title: '预约时间'
+            }, {
+                field: 'serviceType',
+                title: '服务类型',
+                formatter: function(value, row, index) {
+                    return value==0?"维修":"保养";
+                }
+            }, {
+                field: 'createTime',
+                title: '申请时间'
+            }, {
+                field: 'status',
+                title: '状态',
+                formatter: function(value, row, index) {
+                    switch (value) {
+                        case 0: return "预约中";
+                        case 1: return "已到店";
+                        case 2: return "已取消";
+                        case 3: return "超时取消";
+                        case 4: return "已结算";
+                        default:return "";
+                    }
+                }
+            }, {
+                field: 'info',
+                title: '备注'
+            }]
+        });
+    })
+    function changeUser(){
+        $.ajax({
+            url:"/frontend/changeUser",
+            success:function(result){
+                if(result.success){
+                    $("#userName").html(result.data.name);
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

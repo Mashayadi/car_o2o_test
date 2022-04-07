@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>e店邦</title>
+    <link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/frontend/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="/frontend/css/reset.css">
+    <link rel="stylesheet" href="/frontend/css/common.css">
+    <link rel="stylesheet" href="/frontend/css/renewalService.css">
+</head>
+<body>
+<!--头部菜单-->
+<div class="header"></div>
+
+<!--主体内容-->
+<div class="main-container">
+    <div class="main-content">
+        <p class="title"><i></i>续保服务</p>
+        <form id="renewalServiceForm">
+            <div class="form-list">
+                <div class="form-group form-list-item form-list-item1">
+                    <label class="form-title" for="insurance">选择险种</label>
+                    <select id="insurance" class="selectpicker" multiple title="请选择险种" name="insurance">
+                        <option>险种一</option>
+                        <option>险种二</option>
+                        <option>险种三</option>
+                    </select>
+                </div>
+                <div class="form-group form-list-item">
+                    <label class="form-title" for="name">姓名</label>
+                    <input type="text" class="form-control" id="name" placeholder="输入您的姓名" name="userName">
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-group form-list-item form-list-item1">
+                    <label class="form-title" for="phoneNumber">手机号码</label>
+                    <input type="text" class="form-control form-control-phone" id="phoneNumber" placeholder="输入手机号码" name="phoneNum">
+                    <p class="send-btn">发送验证码</p>
+                </div>
+                <div class="form-group form-list-item">
+                    <label class="form-title" for="verificationCode">验证码</label>
+                    <input type="text" class="form-control" id="verificationCode" placeholder="输入验证码" name="verification">
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-group form-list-item form-list-item1">
+                    <label class="form-title" for="carSeries">选择车系</label>
+                    <select id="carSeries" class="selectpicker" title="选择车系" name="carSeries">
+                        <option>车系一</option>
+                        <option>车系二</option>
+                        <option>车系三</option>
+                    </select>
+                </div>
+                <div class="form-list-item">
+                </div>
+            </div>
+            <div class="form-list">
+                <div class="form-list-item" style="padding-left: 120px;">
+                    <div class="form-group radio">
+                        <label>
+                            <input type="checkbox" name="agree[]" checked>
+                            我已阅读并同意<a>《隐私政策》</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="submitBtn">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--底部内容-->
+<div class="footer"></div>
+
+<script src="/frontend/js/jquery-3.6.0.min.js"></script>
+<script src="/frontend/js/bootstrap.min.js"></script>
+<script src="/frontend/js/bootstrap-select.min.js"></script>
+<script src="/frontend/js/bootstrapValidator.min.js"></script>
+<script src="/frontend/js/layer/layer.js"></script>
+<script src="/frontend/js/renewalService.js"></script>
+</body>
+</html>

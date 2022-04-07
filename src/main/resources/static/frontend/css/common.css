@@ -1,0 +1,233 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+}
+
+/*导航菜单*/
+.header-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-container .logo-img {
+    height: 50px;
+    margin-right: 50px;
+}
+
+.header-container .menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-list .menu-item {
+    height: 100%;
+}
+
+.menu-item .menu-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666666;
+}
+
+.menu-item .menu-title:focus, .menu-item .menu-title:hover {
+    color: #666666;
+    text-decoration: none;
+}
+
+.menu-item i {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0px;
+    height: 4px;
+    background-color: #388CFF;
+    transition: all 0.2s;
+}
+
+.menu-item:hover i {
+    width: 70px;
+}
+
+.menu-item .child-menu {
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    width: 100%;
+    height: 0px;
+    font-size: 0px;
+    background-color: #333;
+    transition: height 0.2s;
+    overflow: hidden;
+}
+
+.menu-item:hover .child-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    font-size: 16px;
+}
+
+.child-menu .child-menu-item {
+    line-height: 70px;
+    /*padding: 0px 30px;*/
+    /*cursor: pointer;*/
+    color: #fff;
+}
+
+.child-menu .child-menu-item a {
+    display: inline-block;
+    height: 100%;
+    padding: 0px 30px;
+    color: #fff;
+}
+
+.child-menu .child-menu-item a:focus, .child-menu .child-menu-item a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-container .user-content {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    padding: 0px 10px;
+}
+
+.user-content i {
+    display: inline-block;
+    width: 31px;
+    height: 31px;
+    margin-right: 10px;
+    background: url("../img/user-icon.png") no-repeat center;
+    background-size: 100% 100%;
+}
+
+.user-content .user-name {
+    font-size: 16px;
+    font-weight: 300;
+    color: #999999;
+}
+
+.user-content:focus, .user-content:hover {
+    text-decoration: none;
+}
+
+/*主体内容*/
+.main-container {
+    padding-top: 80px;
+    min-height: calc(100% - 160px);
+}
+
+/*底部内容*/
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 160px;
+    background-color: #131313;
+}
+
+.footer-container .footer-content {
+    width: 100%;
+    max-width: 1920px;
+    min-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.footer-container .footer-left {
+    display: inline-block;
+    margin-right: 300px;
+    text-align: left;
+}
+
+.footer-left .footer-menu {
+    margin-bottom: 38px;
+}
+
+.footer-menu a {
+    position: relative;
+    padding: 0px 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-menu a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-menu a::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-menu a:first-child {
+    padding: 0px 10px 0px 0px;
+}
+
+.footer-menu a:last-child::after {
+    content: '';
+    display: none;
+}
+
+.footer-left .footer-info {
+
+}
+
+.footer-info span {
+    display: inline-block;
+    padding-right: 24px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-container .footer-right {
+    display: inline-block;
+}
+
+.footer-right .footer-contact:first-child {
+    margin-bottom: 20px;
+}
+
+.footer-contact .footer-contact-item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 100px;
+    cursor: pointer;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-contact .footer-contact-item:first-child {
+    margin-right: 45px;
+}
+
+.footer-contact-item .img-box {
+    width: 27px;
+    margin-right: 10px;
+}

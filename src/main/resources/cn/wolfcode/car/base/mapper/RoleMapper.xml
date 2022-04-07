@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.base.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="rkey" property="rkey" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="data_scope" property="dataScope" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.car.base.domain.Role" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_role (name, rkey, seq,
+      data_scope, status, del_flag, create_time,
+      remark)
+    values (#{name,jdbcType=VARCHAR}, #{rkey,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER},
+      #{dataScope,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.Role" >
+    update sys_role
+    set name = #{name,jdbcType=VARCHAR},
+      rkey = #{rkey,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      data_scope = #{dataScope,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, name, rkey, seq, data_scope, status, del_flag, create_time,remark
+    from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, rkey, seq, data_scope, status, del_flag, create_time,remark
+    from sys_role
+  </select>
+  <select id="selectForList" resultMap="BaseResultMap" >
+    select id, name, rkey, seq, data_scope, status, del_flag, create_time,remark
+    from sys_role
+
+    <where>
+      AND del_flag = '0'
+      <if test="name != null and name != ''">
+        AND name like concat('%', #{name}, '%')
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+      <if test="rkey != null and rkey != ''">
+        AND rkey like concat('%', #{rkey}, '%')
+      </if>
+
+      <if test="beginTime != null "><!-- 开始时间检索 -->
+        and date_format(create_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+      </if>
+      <if test="endTime != null "><!-- 结束时间检索 -->
+        and date_format(create_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+      </if>
+    </where>
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" >
+    select id, name, rkey, seq, data_scope, status, del_flag, create_time,remark
+    from sys_role where name = #{name}
+  </select>
+
+  <select id="selectByKey" resultMap="BaseResultMap" >
+    select id, name, rkey, seq, data_scope, status, del_flag, create_time,remark
+    from sys_role  where rkey = #{rkey}
+  </select>
+
+  <insert id="insertMenuRelation">
+    insert into sys_role_menu(role_id, menu_id) values(#{roleId}, #{menuId})
+  </insert>
+
+  <delete id="deleteMenuRelation">
+    delete from sys_role_menu where role_id = #{roleId}
+  </delete>
+
+  <update id="changeStatus">
+    update sys_role set status = #{status} where id = #{roleId}
+  </update>
+
+  <select id="selectUserIdByRoleId" resultType="long">
+    select user_id from sys_user_role where role_id = #{roleId}
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+        select distinct r.id, r.name, r.rkey, r.seq, r.data_scope,
+            r.status, r.del_flag, r.create_time, r.remark
+        from sys_role r
+	        left join sys_user_role ur on ur.role_id = r.id
+	    WHERE r.del_flag = '0' and ur.user_id = #{userId}
+  </select>
+  <update id="updateDataRole" parameterType="cn.wolfcode.car.base.domain.Role" >
+    update sys_role
+    set name = #{name,jdbcType=VARCHAR},
+      rkey = #{rkey,jdbcType=VARCHAR},
+      data_scope = #{dataScope,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteDeptRelation">
+    delete from sys_role_dept  where role_id= #{roleId}
+  </delete>
+
+    <insert id="insertDeptRelation" >
+    insert into sys_role_dept(role_id, dept_id) values(#{roleId}, #{deptId})
+  </insert>
+
+  <insert id="insertUserRelation">
+    insert into sys_user_role(role_id, user_id) values(#{roleId}, #{userId})
+  </insert>
+
+  <delete id="deleteUserRelation">
+    delete  from sys_user_role where role_id =#{roleId} and user_id = #{userId}
+  </delete>
+
+</mapper>

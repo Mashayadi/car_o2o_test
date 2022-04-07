@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.base.mapper.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.Notice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.car.base.domain.Notice" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_notice (title, type, content, 
+      status, create_by, create_time, 
+      remark)
+    values (#{title,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{content,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.Notice" >
+    update sys_notice
+    set title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, title, type, content, status, create_by, create_time, remark
+    from sys_notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, type, content, status, create_by, create_time, remark
+    from sys_notice
+  </select>
+  <select id="selectForList" resultMap="BaseResultMap" >
+    select id, title, type, content, status, create_by, create_time, remark
+    from sys_notice
+    <where>
+      <if test="title != null and title !=''">
+        and title like concat('%',#{title},'%')
+      </if>
+      <if test="createBy != null and  createBy != ''">
+        and create_by like concat('%',#{createBy},'%')
+      </if>
+      <if test="type != null ">
+        and type = #{type}
+      </if>
+    </where>
+
+  </select>
+
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.car.base.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="cn.wolfcode.car.base.domain.Post">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="cn.wolfcode.car.base.domain.Post" useGeneratedKeys="true">
+    insert into sys_post (code, name, seq,
+      status, remark)
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER},
+      #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.car.base.domain.Post">
+    update sys_post
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, code, name, seq, status, remark
+    from sys_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, code, name, seq, status, remark
+    from sys_post
+  </select>
+
+  <select id="selectForList" resultMap="BaseResultMap">
+    select id, code, name, seq, status, remark
+    from sys_post
+    <where>
+      <if test="name != null and name != ''">
+        and name like concat('%', #{name}, '%')
+      </if>
+      <if test="code != null and code != ''">
+        and code like concat('%', #{code}, '%')
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select id, code, name, seq, status, remark
+    from sys_post where name = #{name}
+  </select>
+
+
+  <select id="selectByCode" resultMap="BaseResultMap">
+    select id, code, name, seq, status, remark
+    from sys_post where code = #{code}
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+
+    SELECT p.id, p.name, p.code
+            FROM sys_post p
+                 LEFT JOIN sys_user_post up ON p.id = up.post_id
+                 where up.user_id = #{userId}
+  </select>
+</mapper>

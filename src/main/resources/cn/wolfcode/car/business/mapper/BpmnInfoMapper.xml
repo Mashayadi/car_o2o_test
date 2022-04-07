@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.car.business.mapper.BpmnInfoMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.car.business.domain.BpmnInfo">
+        <id column="id" property="id"/>
+        <result column="bpmn_name" property="bpmnName"/>
+        <result column="bpmn_type" property="bpmnType"/>
+        <result column="bpmn_path" property="bpmnPath"/>
+        <result column="deployment_id" property="deploymentId"/>
+        <result column="act_process_id" property="actProcessId"/>
+        <result column="act_process_key" property="actProcessKey"/>
+        <result column="deploy_time" property="deployTime"/>
+        <result column="info" property="info"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey">
+        delete from bus_bpmn_info
+        where id = #{id}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into bus_bpmn_info (bpmn_name, bpmn_type,bpmn_path, deployment_id, act_process_id, act_process_key,
+        deploy_time, info)
+        values (#{bpmnName}, #{bpmnType},#{bpmnPath}, #{deploymentId}, #{actProcessId}, #{actProcessKey},
+        #{deployTime}, #{info})
+    </insert>
+    <update id="updateByPrimaryKey">
+        update bus_bpmn_info
+        set bpmn_name = #{bpmnName},
+        bpmn_type = #{bpmnType},
+        deployment_id = #{deploymentId},
+        act_process_id = #{actProcessId},
+        act_process_key = #{actProcessKey},
+        deploy_time = #{deployTime},
+        info = #{info}
+        where id = #{id}
+        </update>
+    <update id="updateByBpmn">
+        update bus_bpmn_info
+        set info = #{info} where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select id, bpmn_name, bpmn_type,bpmn_path, deployment_id, act_process_id, act_process_key,
+        deploy_time, info
+        from bus_bpmn_info
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, bpmn_name, bpmn_type,bpmn_path, deployment_id, act_process_id, act_process_key,
+        deploy_time, info
+        from bus_bpmn_info
+    </select>
+    <select id="selectForList" resultMap="BaseResultMap">
+        select id, bpmn_name, bpmn_type,bpmn_path, deployment_id, act_process_id, act_process_key,
+        deploy_time, info
+        from bus_bpmn_info
+        <where>
+            <if test="beginTime != null">
+                and deploy_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and DATE_FORMAT(#{endTime},'%Y-%m-%d') &lt;= DATE_FORMAT(deploy_time,'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+    <select id="selectByType" resultMap="BaseResultMap">
+        select id, bpmn_name, bpmn_type,bpmn_path, deployment_id, act_process_id, act_process_key,
+        deploy_time, info
+        from bus_bpmn_info where bpmn_type=#{type}
+    </select>
+</mapper>

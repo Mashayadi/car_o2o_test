@@ -1,0 +1,249 @@
+.main-container {
+    display: flex;
+}
+
+.main-container .left-menu {
+    flex: 0 0 300px;
+    padding: 50px 0px;
+    background-color: #1D1D1D;
+}
+
+.left-menu .left-menu-item {
+    position: relative;
+    padding: 26px 0px 26px 100px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+}
+
+.left-menu-item.left-menu-item-active i {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 14px;
+    height: 16px;
+    background: url("../img/menu-icon.png") no-repeat center;
+    background-size: 100% 100%;
+}
+
+.main-container .right-content {
+    flex: 1;
+    background-color: #F0F0F0;
+}
+
+.right-content .content-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.right-content .content-item.content-item-active {
+    display: block;
+}
+
+.fault-light {
+    width: 1024px;
+    margin: 0 auto;
+    padding: 60px 0px;
+}
+
+.fault-light .light-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0px 40px;
+}
+
+.light-list .light-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.light-item.light-item-active i {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #E60012;
+    font-size: 0;
+    line-height: 0;
+}
+
+.fault-light .light-content {
+
+}
+
+.light-content .light-name {
+    padding-bottom: 14px;
+    font-size: 20px;
+    color: #333;
+}
+
+.light-content .light-info {
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.surround-content {
+    display: flex;
+    min-height: calc(100% - 120px);
+    margin: 60px;
+    background-color: #fff;
+}
+
+.surround-content .surround-menu {
+    flex: 0 0 180px;
+    background: #F8F8F8;
+}
+
+.surround-menu .surround-menu-item {
+    padding: 26px 0px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333333;
+}
+
+.surround-menu .surround-menu-item.surround-menu-item-active {
+    color: #388CFF;
+}
+
+.surround-content .map-container {
+    position: relative;
+    flex: 1;
+}
+
+#panel {
+    position: absolute;
+    background-color: white;
+    max-height: 90%;
+    overflow-y: auto;
+    top: 20px;
+    left: 40px;
+    width: 280px;
+    z-index: 200;
+    border-bottom: solid 1px silver;
+}
+
+.calculation-content {
+    display: flex;
+    justify-content: space-between;
+    min-height: calc(100% - 120px);
+    margin: 60px;
+    padding: 30px 60px 60px;
+    background-color: #fff;
+}
+
+.calculation-content .calculation-from {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calculation-from .from-select {
+    margin-bottom: 40px;
+}
+
+.from-select .btn {
+    padding: 19px 12px;
+    font-size: 18px;
+}
+
+.calculation-content .programme-item {
+    flex: 1;
+    position: relative;
+    max-width: 560px;
+    min-width: 420px;
+    height: 410px;
+    padding: 164px 87px 0px 87px;
+    margin-top: 200px;
+    margin-left: 80px;
+    background: url("../img/programme_bg.png") no-repeat center;
+    background-size: 100% 100%;
+}
+
+.programme-item .programme-img {
+    position: absolute;
+    left: 50%;
+    top: -200px;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 420px;
+}
+
+.programme-item .programme-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.programme-info .text {
+    font-size: 18px;
+    color: #333333;
+}
+
+.programme-info .value {
+    font-size: 24px;
+    color: #333333;
+}
+
+
+.fault-rescue {
+    display: flex;
+    align-items: center;
+    margin: 60px;
+    padding: 30px 60px 60px;
+    background-color: #fff;
+}
+
+.fault-rescue .left-page {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.fault-rescue .right-page {
+    flex: 1;
+    align-self: flex-start;
+    padding-left: 30px;
+}
+
+.rescue-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0px;
+    border-bottom: 1px solid #ccc;
+}
+
+.rescue-item .rescue-item-text {
+    font-size: 18px;
+    font-weight: 300;
+    color: #333333;
+}
+
+.rescue-item .rescue-item-value {
+    font-size: 24px;
+    color: #333333;
+}
+
+.rescue-select {
+    margin: 60px 0px 10px;
+}
+
+.rescue-select .btn {
+    padding: 10px 12px;
+    font-size: 18px;
+}
+.dropdown-menu>li>a {
+    padding: 8px 20px;
+    font-size: 18px;
+}

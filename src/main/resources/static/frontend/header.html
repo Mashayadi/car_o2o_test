@@ -1,0 +1,83 @@
+<div class="header-container">
+    <a href="home.html"><img class="logo-img" src="/frontend/img/logo.png"/></a>
+    <!--导航菜单-->
+    <ul class="menu-list">
+        <li class="menu-item">
+            <a class="menu-title">
+                查看车型
+                <i></i>
+            </a>
+            <ul class="child-menu">
+                <li class="child-menu-item"><a href="carModel.html?id=0">轿车</a></li>
+                <li class="child-menu-item"><a href="carModel.html?id=1">SUV</a></li>
+                <li class="child-menu-item"><a href="carModel.html?id=2">轿跑车 & 敞篷跑车</a></li>
+                <li class="child-menu-item"><a href="carModel.html?id=3">MPV</a></li>
+                <li class="child-menu-item"><a href="carModel.html?id=4">纯电动车</a></li>
+                <li class="child-menu-item"><a href="carModel.html?id=5">插电式混合动力</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-title">
+                购车支持
+                <i></i>
+            </a>
+            <ul class="child-menu">
+                <li class="child-menu-item"><a href="financialService.html">金融服务</a></li>
+                <li class="child-menu-item"><a href="afterService.html">售后服务</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="maintenance.html" class="menu-title">
+                养修预约
+                <i></i>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="renewalService.html" class="menu-title">
+                续保服务
+                <i></i>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a class="menu-title">
+                车主宝典
+                <i></i>
+            </a>
+            <ul class="child-menu">
+                <li class="child-menu-item"><a href="ownerBook.html?id=0">故障灯解读</a></li>
+                <li class="child-menu-item"><a href="ownerBook.html?id=1">我的周边</a></li>
+                <li class="child-menu-item"><a href="ownerBook.html?id=2">购车计算器</a></li>
+                <li class="child-menu-item"><a href="ownerBook.html?id=3">保险计算器</a></li>
+                <li class="child-menu-item"><a href="ownerBook.html?id=4">故障救援电话</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a class="menu-title uncultivated">
+                装备精品
+                <i></i>
+            </a>
+        </li>
+    </ul>
+    <a href="user.html" class="user-content">
+        <i></i>
+        <p id="userName" class="user-name">黄少存</p>
+    </a>
+</div>
+
+<script>
+    $('.uncultivated').on('click', function () {
+        layer.msg('功能正在建设中，敬请期待！', {icon: 7,time: 2000});
+    });
+    $(function(){
+        $.ajax({
+            url:"/frontend/getCurrentUser",
+            success:function(result){
+                if(result.code == 0){
+                    $("#userName").html(result.data.userName);
+                }else{
+                    alert(result.msg);
+                }
+            }
+        });
+    })
+</script>
